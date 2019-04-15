@@ -1,0 +1,22 @@
+CUSTOMIZATIONS
+===============================
+
+Plugin:       NewsPlus
+File:         wp-content/themes/newsplus/formats/format.php
+Line:         39
+
+Comment out:  $img     = newsplus_image_resize( $img, $imgwidth, $imgheight, $crop, $quality, '', '' );
+Replace with: $img     = newsplus_image_resize( $img, 375, 250, true, $quality, '', '' );
+
+Reason:       We want to automatically crop featured images on category listings, so it looks prettier and consistent.
+
+===============================
+
+Plugin:       Co-Authors Plus
+File:         wp-content/plugins/co-authors-plus/co-authors-plus.php
+Line:         731
+
+Comment out:  $where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*=\s*(' . get_current_user_id() . '))/', $current_user_query, $where, -1 ); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
+Replace with: $where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*=\s*(' . get_current_user_id() . ')\b)/', $current_user_query, $where, -1 ); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
+
+Reason:       Fix sql error on author pages displaying their posts.
